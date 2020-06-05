@@ -1,0 +1,13 @@
+package com.kshyk.springme;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class SpringMeApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(SpringMeApplication.class, args);
+	}
+
+}
