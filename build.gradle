@@ -1,12 +1,39 @@
-plugins {
-	id 'org.springframework.boot' version '2.3.0.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
-	id 'java'
+buildscript {
+	repositories {
+		mavenCentral()
+		jcenter()
+		google()
+	}
 }
+
+ext {
+	springBootVersion = '2.3.0.RELEASE'
+	springframeworkVersion = '5.2.7.RELEASE'
+	lombokVersion = '1.18.12'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
 
 group = 'com.kshyk'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = JavaVersion.VERSION_14
+description = """spring-kshyk"""
+
+compileTestJava {
+	sourceCompatibility = JavaVersion.VERSION_14
+	targetCompatibility = JavaVersion.VERSION_14
+	options.compilerArgs += '-parameters'
+}
+
+repositories {
+	mavenCentral()
+	jcenter()
+	google()
+}
+
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
 
 configurations {
 	compileOnly {
@@ -14,18 +41,13 @@ configurations {
 	}
 }
 
-repositories {
-	mavenCentral()
-}
-
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compile 'org.springframework:spring-context:5.2.6.RELEASE'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+	implementation "org.springframework.boot:spring-boot-starter:${springBootVersion}"
+	implementation "org.springframework.boot:spring-boot-starter-web:${springBootVersion}"
+	compile "org.springframework:spring-context:${springframeworkVersion}"
+	compileOnly "org.projectlombok:lombok:${lombokVersion}"
+	annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+	testImplementation("org.springframework.boot:spring-boot-starter-test:${springBootVersion}") {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
